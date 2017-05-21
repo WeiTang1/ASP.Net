@@ -13,7 +13,19 @@ namespace CodeMigrationTest.Controllers
     public class StudentsController : Controller
     {
         private StudentDataContext db = new StudentDataContext();
+        public ActionResult ReturnMajor()
+        {
+            //linq
+            //var studentsList = db.Students.Where(s => s.Major == "CSE");
 
+            var studentsList = from s in db.Students
+                               where s.Major == "CSE"
+                               select s;
+
+
+            return View(studentsList.ToList());
+
+        }
         // GET: Students
         public ActionResult Index()
         {
